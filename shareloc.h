@@ -26,7 +26,7 @@ private:
     QTimer timer;
 
 private slots:
-    void updateList();
+    void updateList(QSet<QString>);
     void sendFileToUser();
 };
 

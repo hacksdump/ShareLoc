@@ -28,12 +28,15 @@ void BackgroundBroadcastReceiver::processPendingDatagrams()
         datagram.resize(int(udpSocket->pendingDatagramSize()));
         udpSocket->readDatagram(datagram.data(), datagram.size());
         QString IPaddr = datagram.constData();
+        QHostAddress address(IPaddr);
+        if(QAbstractSocket::IPv6Protocol != address.protocol()){
+            continue;
+        }
         if(localIPs.contains(IPaddr)){
             //continue;
         }
         qDebug() << "Receiver: " << IPaddr;
         sharedData::activeIPs.insert(IPaddr);
     }
-
     emit updatedIPs(sharedData::activeIPs);
 }
