@@ -16,6 +16,9 @@ public:
 private slots:
     void processPendingDatagrams();
 
+signals:
+    void updatedIPs(QSet<QString>);
+
 private:
     QUdpSocket *udpSocket = nullptr;
 };
