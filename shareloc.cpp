@@ -6,16 +6,19 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QTcpSocket>
+#include <QTcpServer>
+#include <QListWidgetItem>
+#include "listenforfile.h"
 
 ShareLoc::ShareLoc(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ShareLoc)
 {
     ui->setupUi(this);
-    //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(updateList()));
     connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(sendFileToUser()));
     BackgroundBroadcastReceiver *recv = new BackgroundBroadcastReceiver();
     connect(recv, SIGNAL(updatedIPs(QSet<QString>)), this, SLOT(updateList(QSet<QString>)));
+    ListenForFile listener;
 }
 
 ShareLoc::~ShareLoc()
@@ -32,13 +35,14 @@ void ShareLoc::updateList(QSet<QString> IPs)
 }
 void ShareLoc::sendFileToUser()
 {
+    QString selectedIP = ui->listWidget->item(0)->text();
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Text"), "/home/", tr("Text Files (*.txt)"));
     QFile file(fileName);
     file.open(QIODevice::ReadOnly);
     QByteArray fdata = file.readAll();
     file.close();
     QTcpSocket *tcpSocket = new QTcpSocket(this);
-    tcpSocket->connectToHost("localhost", 12345);
+    tcpSocket->connectToHost(selectedIP, 12345);
     tcpSocket->write(fdata);
     tcpSocket->close();
 }

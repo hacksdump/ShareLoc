@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
         shareloc.cpp \
     backgroundbroadcastsender.cpp \
-    backgroundbroadcastreceiver.cpp
+    backgroundbroadcastreceiver.cpp \
+    listenforfile.cpp
 
 HEADERS += \
         shareloc.h \
     backgroundbroadcastsender.h \
-    backgroundbroadcastreceiver.h
+    backgroundbroadcastreceiver.h \
+    listenforfile.h
 
 FORMS += \
         shareloc.ui

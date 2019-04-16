@@ -36,7 +36,6 @@ void BackgroundBroadcastReceiver::processPendingDatagrams()
         if(localIPs.contains(IPaddr)){
             continue;
         }
-        qDebug() << "Receiver: " << IPaddr;
         sharedData::activeIPs.insert(IPaddr);
     }
     emit updatedIPs(sharedData::activeIPs);
