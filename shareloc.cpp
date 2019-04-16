@@ -1,5 +1,6 @@
 #include "shareloc.h"
 #include "ui_shareloc.h"
+#include "backgroundbroadcastsender.h"
 
 ShareLoc::ShareLoc(QWidget *parent) :
     QMainWindow(parent),

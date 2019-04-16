@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,10 +26,14 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        shareloc.cpp
+        shareloc.cpp \
+    backgroundbroadcastsender.cpp \
+    backgroundbroadcastreceiver.cpp
 
 HEADERS += \
-        shareloc.h
+        shareloc.h \
+    backgroundbroadcastsender.h \
+    backgroundbroadcastreceiver.h
 
 FORMS += \
         shareloc.ui
