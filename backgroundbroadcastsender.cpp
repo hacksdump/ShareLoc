@@ -12,7 +12,7 @@ BackgroundBroadcastSender::BackgroundBroadcastSender(QWidget *parent) : QWidget(
 
 void BackgroundBroadcastSender::startBroadcasting()
 {
-    timer.start(1000);
+    timer.start(5000);
 }
 
 void BackgroundBroadcastSender::broadcastDatagram()
@@ -20,10 +20,9 @@ void BackgroundBroadcastSender::broadcastDatagram()
     QByteArray datagram;
     const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
     for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
-        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost)
+        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost){
              datagram =  address.toString().toUtf8();
              udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
+        }
     };
-
-
 }
