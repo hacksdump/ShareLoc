@@ -4,6 +4,7 @@
 #include "backgroundbroadcastreceiver.h"
 #include <QDebug>
 #include <QFile>
+#include <QFileDialog>
 #include <QTcpSocket>
 
 ShareLoc::ShareLoc(QWidget *parent) :
@@ -31,7 +32,8 @@ void ShareLoc::updateList(QSet<QString> IPs)
 }
 void ShareLoc::sendFileToUser()
 {
-    QFile file("/home/hmaurya/Downloads/text.txt");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Text"), "/home/", tr("Text Files (*.txt)"));
+    QFile file(fileName);
     file.open(QIODevice::ReadOnly);
     QByteArray fdata = file.readAll();
     file.close();

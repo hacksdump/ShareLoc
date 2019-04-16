@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include <QtNetwork>
 #include <QSet>
+#include <QFileDialog>
 
 BackgroundBroadcastReceiver::BackgroundBroadcastReceiver(QWidget *parent) : QWidget(parent)
 {
